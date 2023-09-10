@@ -30,7 +30,8 @@ export default {
         const top_div = doc.createElement('DIV');
         top_div.className = 'sun-editor' + (options.rtl ? ' se-rtl' : '');
         if (element.id) top_div.id = 'suneditor_' + element.id;
-    
+
+
         // relative div
         const relative = doc.createElement('DIV');
         relative.className = 'se-container';
@@ -60,6 +61,30 @@ export default {
         const placeholder_span = initElements.placeholder;
         let textarea = initElements.codeView;
 
+        //////////////////////////////////////////////////////////////////// GS
+        const observer = new MutationObserver(() => {                   // GS
+            //console.log(top_div.style.width, top_div.style.height);
+            let c = document.querySelector(".se-container");
+            let t = document.querySelector(".se-toolbox");
+            let cw = c.offsetWidth;
+	    let ch = c.offsetHeight;
+            let th = 0;
+            if ( t == undefined ) {
+	     th = 0;
+	    } else {
+	     th = t.offsetHeight;
+	    }
+            let ele = document.querySelector(".se-wrapper-wysiwyg");
+            ele.style.height = (ch - th ).toString() + 'px';
+            ele.style.width = cw.toString() + 'px';
+        });
+        const observe_options = {
+            attriblutes: true,
+            attributeFilter: ["style"]
+        };
+        observer.observe(top_div, observe_options);
+	   
+        //////////////////////////////////////////////////////////////////// GS
         // resizing bar
         const resizing_bar = bottomBar.resizingBar;
         const navigation = bottomBar.navigation;

@@ -33,7 +33,7 @@ let editor = suneditor.create('textarea', {
         ['preview', 'print'],
         ['save', 'template'],
     ],
-    resizingBar : true,
+    resizingBar : false,
     showPathLabel: false,
     resizeEnable: true,
 })
