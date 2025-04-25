@@ -1,5 +1,6 @@
 
 import '/src/assets/css/suneditor.css'
+import '/src/assets/css/suneditor-contents.css'
 import suneditor from '/src/suneditor'
 import plugins from '/src/plugins'
 //import {en}  from '/src/lang'
@@ -13,7 +14,7 @@ let data2 = `
 `;
 
 let ta = document.querySelector("#textarea")
-ta.value = data2;
+ta.value = data1;
 
 
 let editor = suneditor.create('textarea', {
