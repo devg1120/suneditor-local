@@ -15,7 +15,9 @@ table tr td, table tr th{    word-wrap: break-word; border: 1px solid #000; min-
         z-index: 10000;
         width: 150px;
         background: #1b1a1a;
+        background: #ffffff;
         border-radius: 5px;
+        border: 1px solid #0066cc;
         transform: scale(0);
         transform-origin: top left;
 }
@@ -29,15 +31,17 @@ table tr td, table tr th{    word-wrap: break-word; border: 1px solid #000; min-
   padding: 8px 10px;
   font-size: 15px;
   color: #eee;
+  color: #000;
   cursor: pointer;
   border-radius: inherit;
 }
 
 #context-menu .item:hover {
   background: #343434;
+  background: #99ccff;
 }
 
 .selected {
-  /*border : 2px solid red ;*/
-   background : lightgreen ; 
+  border : 2px solid #0080ff ;
+  /* background : lightgreen ; */
 }

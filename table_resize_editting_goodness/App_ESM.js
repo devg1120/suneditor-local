@@ -30,6 +30,10 @@ function table_cells() {
 
 function next_insert_row() {
   contextMenu.classList.remove("visible");
+  if (select_td == null) {
+    return;
+  }
+
   let param = select_td.id.split("_");
   let row_num = parseInt(param[1]);
   let tr = table.insertRow(row_num + 1);
@@ -44,6 +48,9 @@ function next_insert_row() {
 
 function prev_insert_row() {
   contextMenu.classList.remove("visible");
+  if (select_td == null) {
+    return;
+  }
   let param = select_td.id.split("_");
   let row_num = parseInt(param[1]);
   let tr = table.insertRow(row_num);
@@ -58,6 +65,9 @@ function prev_insert_row() {
 
 function left_insert_col() {
   contextMenu.classList.remove("visible");
+  if (select_td == null) {
+    return;
+  }
   let param = select_td.id.split("_");
   let col_num = parseInt(param[2]);
   let tbody = table.childNodes[1]; //tbody
@@ -85,6 +95,9 @@ function left_insert_col() {
 
 function right_insert_col() {
   contextMenu.classList.remove("visible");
+  if (select_td == null) {
+    return;
+  }
   let param = select_td.id.split("_");
   let col_num = parseInt(param[2]);
   let tbody = table.childNodes[1]; //tbody
@@ -163,6 +176,18 @@ function table_setid() {
       });
       r += 1;
     }
+  });
+  tds = document.querySelectorAll("#table_resize  td");
+  tds.forEach((td) => {
+    td.removeEventListener("click", null);
+    td.addEventListener("click", (e) => {
+      //console.log("td click");
+      if (select_td != null) {
+        select_td.classList.remove("selected");
+      }
+      select_td = td;
+      select_td.classList.add("selected");
+    });
   });
 }
 
@@ -288,13 +313,16 @@ export const x = 199;
 export function mclick(n) {
   console.log("mclick", n);
   contextMenu.classList.remove("visible");
+  if (select_td == null) {
+    return;
+  }
   let id = select_td.id;
   alert(`option ${n}   select ${id}`);
 }
 const contextMenu = document.getElementById("context-menu");
 //const scope = document.querySelector("body");
 const scope = document.querySelector("#table_resize");
-const tds = document.querySelectorAll("#table_resize  td");
+let tds = document.querySelectorAll("#table_resize  td");
 //console.log(tds);
 const normalizePozition = (mouseX, mouseY) => {
   // ? compute what is the mouse position relative to the container element (scope)
@@ -327,8 +355,8 @@ const normalizePozition = (mouseX, mouseY) => {
     //  scopeOffsetY + scope.clientHeight - contextMenu.clientHeight;
   }
 
-//  console.log("X", normalizedX);
-//  console.log("Y", normalizedY);
+  //  console.log("X", normalizedX);
+  //  console.log("Y", normalizedY);
 
   return { normalizedX, normalizedY };
 };
@@ -373,11 +401,9 @@ tds.forEach((td) => {
   });
 });
 
-
 menu_setup2();
 table_setid();
 //table_dump();
 setTdWidth(table);
 createResizeDiv();
 initEvents(table_th);
-
