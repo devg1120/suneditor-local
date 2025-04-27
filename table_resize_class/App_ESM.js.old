@@ -20,9 +20,6 @@ let container = document.getElementById("container"),
 
 container.style.position = "relative";
 
-let select_td = null;
-let tds = document.querySelectorAll("#table_resize  td");
-
 function table_rows() {
   return table.rows.length;
 }
@@ -280,12 +277,9 @@ function initEvents(table_th) {
 
 function setTdWidth() {
   var elm_bound = table.getBoundingClientRect();
-          console.log("elm_bound",elm_bound)
   var table_wt = elm_bound.width;
   var th_length = table_th.length;
-  console.log("th_length",th_length)
   th_width = table_wt / th_length;
-	console.log("setTdWidth", th_width);
 }
 
 function createResizeDiv() {
@@ -300,14 +294,19 @@ function createResizeDiv() {
     yDiv.className = "y_resize tb_resize";
     yDiv.setAttribute("data-resizecol", i);
     var leftPos = i * th_width + 0.5;
-	  console.log(th_length);
-	  console.log(th_width);
-	  console.log(leftPos);
     yDiv.style.cssText = "left: " + leftPos + "px;";
     cont.append(yDiv);
   }
 }
 
+/*
+menu_setup2();
+table_setid();
+table_dump();
+setTdWidth(table);
+createResizeDiv();
+initEvents(table_th);
+*/
 
 export const x = 199;
 
@@ -321,8 +320,10 @@ export function mclick(n) {
   alert(`option ${n}   select ${id}`);
 }
 const contextMenu = document.getElementById("context-menu");
+//const scope = document.querySelector("body");
 const scope = document.querySelector("#table_resize");
-
+let tds = document.querySelectorAll("#table_resize  td");
+//console.log(tds);
 const normalizePozition = (mouseX, mouseY) => {
   // ? compute what is the mouse position relative to the container element (scope)
   let { left: scopeOffsetX, top: scopeOffsetY } = scope.getBoundingClientRect();
@@ -387,6 +388,18 @@ scope.addEventListener("click", (e) => {
   }
 });
 
+let select_td = null;
+
+tds.forEach((td) => {
+  td.addEventListener("click", (e) => {
+    //console.log("td click");
+    if (select_td != null) {
+      select_td.classList.remove("selected");
+    }
+    select_td = td;
+    select_td.classList.add("selected");
+  });
+});
 
 menu_setup2();
 table_setid();

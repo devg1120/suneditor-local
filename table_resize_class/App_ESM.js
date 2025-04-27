@@ -280,12 +280,9 @@ function initEvents(table_th) {
 
 function setTdWidth() {
   var elm_bound = table.getBoundingClientRect();
-          console.log("elm_bound",elm_bound)
   var table_wt = elm_bound.width;
   var th_length = table_th.length;
-  console.log("th_length",th_length)
   th_width = table_wt / th_length;
-	console.log("setTdWidth", th_width);
 }
 
 function createResizeDiv() {
@@ -300,14 +297,10 @@ function createResizeDiv() {
     yDiv.className = "y_resize tb_resize";
     yDiv.setAttribute("data-resizecol", i);
     var leftPos = i * th_width + 0.5;
-	  console.log(th_length);
-	  console.log(th_width);
-	  console.log(leftPos);
     yDiv.style.cssText = "left: " + leftPos + "px;";
     cont.append(yDiv);
   }
 }
-
 
 export const x = 199;
 
@@ -386,7 +379,6 @@ scope.addEventListener("click", (e) => {
     contextMenu.classList.remove("visible");
   }
 });
-
 
 menu_setup2();
 table_setid();
