@@ -289,25 +289,26 @@ console.log(this.contextMenu);
     this.next_element = this.table_th[col_index + 1];
     this.dragStart = true;
     this.cursorStart = this.resizeCheck ? event.pageX : event.pageY;
-    var elm_bound = col_element.getBoundingClientRect();
+    var elm_bound = this.col_element.getBoundingClientRect();
     this.width = elm_bound.width;
-    this.table_wt = table.offsetWidth;
-    if (next_element != undefined) {
-      var next_bound = next_element.getBoundingClientRect();
+    this.table_wt = this.table.offsetWidth;
+    if (this.next_element != undefined) {
+      var next_bound = this.next_element.getBoundingClientRect();
       this.next_width = next_bound.width;
     }
-    this.resize_left = this.getBoundingClientRect().left - bodyRect.left;
+    //this.resize_left = this.getBoundingClientRect().left - bodyRect.left;
+    this.resize_left = this.resize.getBoundingClientRect().left - this.bodyRect.left;
   }
 
   mouseMove = () => {
     if (this.dragStart) {
       var cursorPosition = this.resizeCheck ? event.pageX : event.pageY;
       var mouseMoved = cursorPosition - this.cursorStart;
-      var newLeft = resize_left + mouseMoved;
-      var newWidth = width + mouseMoved;
+      var newLeft = this.resize_left + mouseMoved;
+      var newWidth = this.width + mouseMoved;
       var new_nextWidth, new_nextHeight;
       if (this.next_element != undefined) {
-        new_nextWidth = next_width - mouseMoved;
+        new_nextWidth = this.next_width - mouseMoved;
       }
       if (newWidth > 30 && (new_nextWidth > 30 || this.next_element == undefined)) {
         this.col_element.style.cssText = "width: " + newWidth + "px;";
