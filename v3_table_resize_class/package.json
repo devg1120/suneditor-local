@@ -1,0 +1,15 @@
+{
+  "name": "table_resize_editting_goodness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App_ESM.js",
+  "scripts": {
+    "fmt": "prettier --write *.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}
