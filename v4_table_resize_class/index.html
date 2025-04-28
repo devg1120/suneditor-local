@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>custum table</title>
+  <link rel="stylesheet" href="styles.css">
+  <!--
+  <script type="text/javascript" src="App.js"></script>
+  --> 
+ <!--
+  <script type="module" src="App_ESM.js">
+  </script>
+  -->
+
+</head>
+<body>
+  <script type="module" >
+	  import {Table} from "./table_esm.js";
+	  window.onload = function () {
+
+	  let table1 = new Table("container1");
+	  table1.init();
+	  let table2 = new Table("container2");
+	  table2.init();
+	  let table3 = new Table("container3");
+	  table3.init();
+	  let table4 = new Table("container4");
+	  table4.init();
+          //console.log(x);
+          //mclick(888);
+	  };
+               
+  </script>
+<!--
+    <div id="context-menu">
+      <div class="item"  onclick="mclick(1)" >Option 1</div>
+    </div>
+-->
+<div class="gp-header">Table Resize in Javascript</div>
+
+<div class="container" id="container1">
+
+    <div id="context-menu">
+      <div class="item"  onclick="mclick(1)" >Option 1</div>
+    </div>
+
+  <table border="0" cellpadding = "0" cellspacing="0" id="table_resize" contenteditable="true">        
+    <tr>
+      <th><div>Id</div></th>
+      <th><div>First Name</div></th>
+      <th><div>Last Name</div></th>
+      <th><div>Age</div></th>
+    </tr>
+    <tr>
+      <td><div>1</div></td>
+      <td><div>Gowri</div></td>
+      <td><div>Prasanth</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>2</div></td>
+      <td><div>Saravana</div></td>
+      <td><div>vel</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>3</div></td>
+      <td><div>Kumar</div></td>
+      <td><div>KG</div></td>
+      <td><div>24</div></td>
+    </tr>
+  </table>
+
+
+</div>
+
+<br/>
+
+<div class="gp-header">2nd Table Resize in Javascript</div>
+<div class="container" id="container2">
+
+    <div id="context-menu">
+      <div class="item"  onclick="mclick(1)" >Option 1</div>
+    </div>
+
+  <table border="0" cellpadding = "0" cellspacing="0" id="table_resize" contenteditable="true">        
+    <tr>
+      <th><div>Id</div></th>
+      <th><div>First Name</div></th>
+      <th><div>Last Name</div></th>
+      <th><div>Age</div></th>
+    </tr>
+    <tr>
+      <td><div>1</div></td>
+      <td><div>Gowri</div></td>
+      <td><div>Prasanth</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>2</div></td>
+      <td><div>Saravana</div></td>
+      <td><div>vel</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>3</div></td>
+      <td><div>Kumar</div></td>
+      <td><div>KG</div></td>
+      <td><div>24</div></td>
+    </tr>
+  </table>
+
+
+</div>
+<!--
+<div  class="container" >||</div>
+-->
+<br/>
+<div class="container" id="container3">
+
+    <div id="context-menu">
+      <div class="item"  onclick="mclick(1)" >Option 1</div>
+    </div>
+
+  <table border="0" cellpadding = "0" cellspacing="0" id="table_resize" contenteditable="true">        
+    <tr>
+      <th><div>Id</div></th>
+      <th><div>First Name</div></th>
+      <th><div>Last Name</div></th>
+      <th><div>Age</div></th>
+    </tr>
+    <tr>
+      <td><div>1</div></td>
+      <td><div>Gowri</div></td>
+      <td><div>Prasanth</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>2</div></td>
+      <td><div>Saravana</div></td>
+      <td><div>vel</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>3</div></td>
+      <td><div>Kumar</div></td>
+      <td><div>KG</div></td>
+      <td><div>24</div></td>
+    </tr>
+  </table>
+
+
+</div>
+
+<div class="container" >--------</div>
+
+<div class="container" id="container4">
+
+    <div id="context-menu">
+      <div class="item"  onclick="mclick(1)" >Option 1</div>
+    </div>
+
+  <table border="0" cellpadding = "0" cellspacing="0" id="table_resize" contenteditable="true">        
+    <tr>
+      <th><div>Id</div></th>
+      <th><div>First Name</div></th>
+      <th><div>Last Name</div></th>
+      <th><div>Age</div></th>
+    </tr>
+    <tr>
+      <td><div>1</div></td>
+      <td><div>Gowri</div></td>
+      <td><div>Prasanth</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>2</div></td>
+      <td><div>Saravana</div></td>
+      <td><div>vel</div></td>
+      <td><div>24</div></td>
+    </tr>
+    <tr>
+      <td><div>3</div></td>
+      <td><div>Kumar</div></td>
+      <td><div>KG</div></td>
+      <td><div>24</div></td>
+    </tr>
+  </table>
+
+
+</div>
+</body>
+</html>
