@@ -20,16 +20,332 @@ export class Table {
       ["prev insert row", this.prev_insert_row],
       ["left insert col", this.left_insert_col],
       ["right insert col", this.right_insert_col],
+      ["data dump", this.data_dump],
+      ["data save", this.data_save],
     ];
+    //this.test_set_data2();
+    //this.test_json_to_data();
+    //this.test_json_to_data2();
   }
 
-  init() {
+
+  test_set_data() {
+
+    var items = [
+      {
+        index: { diameter: "int" , neighbourhood: "string" },
+        model: "hug.tree",
+        pk: 345,
+      },
+      {
+        fields: { diameter: 23.0, neighbourhood: "WEST END" },
+        model: "hug.tree",
+        pk: 345,
+      },
+      {
+        fields: { diameter: 14.0, neighbourhood: "MOUNT PLEASANT" },
+        model: "hug.tree",
+        pk: 484,
+      },
+      {
+        fields: { neighbourhood: "MOUNT PLEASANT" },
+        model: "hug.tree",
+        pk: 484,
+      },
+      {
+        fields: { diameter: 14.0  },
+        model: "hug.tree",
+        pk: 484,
+      },
+      {
+        fields: {   },
+        model: "hug.tree",
+        pk: 484,
+      },
+    ];
+    
+    var  index = {};
+    var  result = [];
+
+    result.push([]);
+    for (var key in items[0].index) {
+      result[result.length - 1].push(key);
+      index[key] = items[0].index[key];
+    }
+    var i = 0;
+    while (i < items.length) {
+      if (items[i].fields) {
+        result.push([]);
+        //for (var key in items[i].fields) {
+        for (var key in index) {
+          result[result.length - 1].push(items[i].fields[key]);
+          /*
+	  // default set mode
+          if (items[i].fields[key] == undefined) {
+		  if ( index[key] == "int" ) { 
+			  result[result.length - 1].push(0);
+		  } else if ( index[key] == "string" ) { 
+			  result[result.length - 1].push("");
+		  } else {
+                          result[result.length - 1].push(items[i].fields[key]);
+		  }
+	  } else {
+             result[result.length - 1].push(items[i].fields[key]);
+	  }
+	  */
+        }
+      }
+      i++;
+    }
+    console.log(index);
+    console.log(result);
+
+  }
+
+  test_set_data2() {
+/*
+ [
+ ["Id","First Name","Last Name","Age"],
+ ["1","Gowri","Prasanth","24"],
+ ["2","Saravana","vel","24"],
+ ["3","Kumar","KG","24"]
+ ]
+
+ */
+    var items = [
+      {
+	index: { id: "int" , first_name: "string" , last_name: "string", age: "int"},
+	title:  { id: "Id" , first_name: "First Name" , last_name: "Last Name", age: "Age"},
+        pk: 345,
+      },
+      {
+	fields: { id: 1 , first_name: "Gowri" , last_name: "Prasanth", age: 24},
+        model: "hug.tree",
+        pk: 345,
+      },
+      {
+	fields: { id: 2 , first_name: "Saravana" , last_name: "vel", age: 31},
+        model: "hug.tree",
+        pk: 484,
+      },
+      {
+	fields: { id: 3 , first_name: "Kumar" , last_name: "KG", age: 64},
+        model: "hug.tree",
+        pk: 484,
+      },
+    ];
+    
+    var  index = {};
+    var  result = [];
+
+    result.push([]);
+    for (var key in items[0].index) {
+      //result[result.length - 1].push(key);
+      index[key] = items[0].index[key];
+    }
+    for (var key in items[0].title) {
+      result[result.length - 1].push(items[0].title[key]);
+    }
+    var i = 0;
+    while (i < items.length) {
+      if (items[i].fields) {
+        result.push([]);
+        //for (var key in items[i].fields) {
+        for (var key in index) {
+          result[result.length - 1].push(items[i].fields[key]);
+          /*
+	  // default set mode
+          if (items[i].fields[key] == undefined) {
+		  if ( index[key] == "int" ) { 
+			  result[result.length - 1].push(0);
+		  } else if ( index[key] == "string" ) { 
+			  result[result.length - 1].push("");
+		  } else {
+                          result[result.length - 1].push(items[i].fields[key]);
+		  }
+	  } else {
+             result[result.length - 1].push(items[i].fields[key]);
+	  }
+	  */
+        }
+      }
+      i++;
+    }
+    console.log(index);
+    console.log(result);
+  }
+
+  test_json_to_data() {
+    var obj = [
+      {
+	index: { id: "int" , first_name: "string" , last_name: "string", age: "int"},
+	title:  { id: "Id" , first_name: "First Name" , last_name: "Last Name", age: "Age"},
+        pk: 345,
+      },
+      {
+	fields: { id: 1 , first_name: "Gowri" , last_name: "Prasanth", age: 24},
+        model: "hug.tree",
+        pk: 345,
+      },
+      {
+	fields: { id: 2 , first_name: "Saravana" , last_name: "vel", age: 31},
+        model: "hug.tree",
+        pk: 484,
+      },
+      {
+	fields: { id: 3 , first_name: "Kumar" , last_name: "KG", age: 64},
+        model: "hug.tree",
+        pk: 484,
+      },
+    ];
+   console.log(JSON.stringify(obj))
+  }
+
+  test_json_to_data2() {
+   let json_data = `
+        [
+	   {"index":{"id":"int","first_name":"string","last_name":"string","age":"int"},
+	    "title":{"id":"Id","first_name":"First Name","last_name":"Last Name","age":"Age"},
+	    "pk":345
+	    },
+	   {"fields":{"id":1,"first_name":"Gowri","last_name":"Prasanth","age":24},
+	    "model":"hug.tree",
+	    "pk":345
+	    },
+	   {"fields":{"id":2,"first_name":"Saravana","last_name":"vel","age":31},
+	    "model":"hug.tree",
+	    "pk":484
+	    },
+	   {"fields":{"id":3,"first_name":"Kumar","last_name":"KG","age":64},
+	    "model":"hug.tree",
+	    "pk":484
+	    }
+         ]
+   `;
+
+   let obj = JSON.parse(json_data);
+   console.log(obj);
+   let array = this.table_json_to_array(json_data);
+   console.log(array);
+  }
+
+  table_json_to_array(json) {
+    let items = JSON.parse(json);
+    var  index = {};
+    var  result = [];
+
+    result.push([]);
+    for (var key in items[0].index) {
+      //result[result.length - 1].push(key);
+      index[key] = items[0].index[key];
+    }
+    for (var key in items[0].title) {
+      result[result.length - 1].push(items[0].title[key]);
+    }
+    var i = 0;
+    while (i < items.length) {
+      if (items[i].fields) {
+        result.push([]);
+        //for (var key in items[i].fields) {
+        for (var key in index) {
+          result[result.length - 1].push(items[i].fields[key]);
+          /*
+	  // default set mode
+          if (items[i].fields[key] == undefined) {
+		  if ( index[key] == "int" ) { 
+			  result[result.length - 1].push(0);
+		  } else if ( index[key] == "string" ) { 
+			  result[result.length - 1].push("");
+		  } else {
+                          result[result.length - 1].push(items[i].fields[key]);
+		  }
+	  } else {
+             result[result.length - 1].push(items[i].fields[key]);
+	  }
+	  */
+        }
+      }
+      i++;
+    }
+    //console.log(index);
+    //console.log(result);
+    var  index = {};
+    var  result = [];
+
+    result.push([]);
+    for (var key in items[0].index) {
+      //result[result.length - 1].push(key);
+      index[key] = items[0].index[key];
+    }
+    for (var key in items[0].title) {
+      result[result.length - 1].push(items[0].title[key]);
+    }
+    var i = 0;
+    while (i < items.length) {
+      if (items[i].fields) {
+        result.push([]);
+        //for (var key in items[i].fields) {
+        for (var key in index) {
+          result[result.length - 1].push(items[i].fields[key]);
+          /*
+	  // default set mode
+          if (items[i].fields[key] == undefined) {
+		  if ( index[key] == "int" ) { 
+			  result[result.length - 1].push(0);
+		  } else if ( index[key] == "string" ) { 
+			  result[result.length - 1].push("");
+		  } else {
+                          result[result.length - 1].push(items[i].fields[key]);
+		  }
+	  } else {
+             result[result.length - 1].push(items[i].fields[key]);
+	  }
+	  */
+        }
+      }
+      i++;
+    }
+    //console.log(index);
+    //console.log(result);
+    return result;
+  }
+
+  table_build(table_data){
+    var menu = document.createElement("div");
+    menu.id = "context-menu";
+    var table = document.createElement("table");
+    table.id = "table_resize";
+    table.contentEditable = true;
+    for (var i = 0; i < table_data.length; i++) {
+      var tr = document.createElement("tr");
+      for (var j = 0; j < table_data[0].length; j++) {
+        if (i === 0) {
+          var th = document.createElement("th");
+          th.textContent = table_data[i][j];
+          tr.appendChild(th);
+        } else {
+          var td = document.createElement("td");
+          td.textContent = table_data[i][j];
+          tr.appendChild(td);
+        }
+      }
+      table.appendChild(tr);
+    }
+    this.container.appendChild(menu);
+    this.container.appendChild(table);
+  }
+
+  init(json) {
+    this.container = document.getElementById(this.container_id);
+    let data = this.table_json_to_array(json);
+    this.table_build(data);
+
     this.cursorStart = 0;
     this.dragStart = false;
     this.next_width = undefined;
 
     //this.container = document.getElementById("container");
-    this.container = document.getElementById(this.container_id);
+    //this.container = document.getElementById(this.container_id);
     this.table = this.container.querySelector("#table_resize");
     this.contextMenu = this.container.querySelector("#context-menu");
     this.table_th = this.table.getElementsByTagName("th");
@@ -63,7 +379,7 @@ export class Table {
     });
 
     this.table.addEventListener("click", (e) => {
-      console.log("click", this.container_id);
+      //console.log("click", this.container_id);
       // ? close the menu if the user clicks outside of it
       if (e.target.offsetParent != this.contextMenu) {
         this.contextMenu.classList.remove("visible");
@@ -134,9 +450,10 @@ export class Table {
     }
     let param = this.select_td.id.split("_");
     let col_num = parseInt(param[2]);
-    let tbody = this.table.childNodes[1]; //tbody
+    //let tbody = this.table.childNodes[1]; //tbody
     let r = 0;
-    tbody.childNodes.forEach((tr) => {
+    //tbody.childNodes.forEach((tr) => {
+    this.table.childNodes.forEach((tr) => {
       //console.log("nodeName", c.nodeName);
       if (tr.nodeName == "TR") {
         if (r == 0) {
@@ -165,9 +482,10 @@ export class Table {
     }
     let param = this.select_td.id.split("_");
     let col_num = parseInt(param[2]);
-    let tbody = this.table.childNodes[1]; //tbody
+    //let tbody = this.table.childNodes[1]; //tbody
     let r = 0;
-    tbody.childNodes.forEach((tr) => {
+    //tbody.childNodes.forEach((tr) => {
+    this.table.childNodes.forEach((tr) => {
       //console.log("nodeName", c.nodeName);
       if (tr.nodeName == "TR") {
         if (r == 0) {
@@ -188,6 +506,77 @@ export class Table {
     //setTdWidth(table);
     this.createResizeDiv();
     this.initEvents(this.table_th);
+  };
+
+  data_dump = () => {
+    this.contextMenu.classList.remove("visible");
+    console.log("data_dump", this.container_id);
+
+    let tbody = this.table.childNodes[1]; //tbody
+    let r = 0;
+    tbody.childNodes.forEach((c) => {
+      //console.log("nodeName", c.nodeName);
+      if (c.nodeName == "TR") {
+        let id = `TR_${r}`;
+        let d = 0;
+        c.childNodes.forEach((c) => {
+          //console.log("   nodeName", c.nodeName);
+          if (c.nodeName == "TH") {
+            let id = `TH_${r}_${d}`;
+		  console.log(id, c.innerText)
+            d += 1;
+          }
+          if (c.nodeName == "TD") {
+            let id = `TD_${r}_${d}`;
+		  console.log(id, c.innerText)
+            d += 1;
+          }
+        });
+        r += 1;
+      }
+    });
+  };
+
+  data_save = () => {
+    this.contextMenu.classList.remove("visible");
+    console.log("data_save", this.container_id);
+
+    const rows = this.table.rows.length;;
+    const cols = this.table.rows[0].cells.length
+    const data = Array.from({ length: rows }, () => new Array(cols).fill(0));
+
+    let tbody = this.table.childNodes[1]; //tbody
+    let r = 0;
+    tbody.childNodes.forEach((c) => {
+      //console.log("nodeName", c.nodeName);
+      if (c.nodeName == "TR") {
+        let id = `TR_${r}`;
+        let d = 0;
+        if ( r == 0 ) {
+                c.childNodes.forEach((c) => {
+                    if (c.nodeName == "TH") {
+	              //console.log(id, c.innerText)
+	              data[r][d] = c.innerText
+                      d += 1;
+	            }
+                });
+	} else {
+                c.childNodes.forEach((c) => {
+                    if (c.nodeName == "TD") {
+	              //console.log(id, c.innerText)
+	              data[r][d] = c.innerText
+                      d += 1;
+	            }
+                });
+	}
+        r += 1;
+      }
+    });
+
+    console.log(data);
+    var _json = JSON.stringify(data);
+    console.log(_json);
+
   };
 
   menu_setup() {
@@ -217,9 +606,11 @@ export class Table {
   }
 
   table_setid() {
+	  //console.log("table_set_id");
     let tbody = this.table.childNodes[1]; //tbody
     let r = 0;
-    tbody.childNodes.forEach((c) => {
+    //tbody.childNodes.forEach((c) => {
+    this.table.childNodes.forEach((c) => {
       //console.log("nodeName", c.nodeName);
       if (c.nodeName == "TR") {
         c.id = `TR_${r}`;
@@ -299,7 +690,7 @@ export class Table {
     //this.resize_left = this.getBoundingClientRect().left - bodyRect.left;
     this.resize_left =
       //this.resize.getBoundingClientRect().left - this.bodyRect.left - this.tableRect.left;
-      this.resize.getBoundingClientRect().left  - this.tableRect.left;
+      this.resize.getBoundingClientRect().left - this.tableRect.left;
   };
 
   mouseMove = () => {
