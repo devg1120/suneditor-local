@@ -64,10 +64,27 @@
             }
          ]
    `;
+   let json_data3 = `
+        [
+           {"index":{"A":"int","B":"int","C":"int","D":"int","E":"int"},
+            "title":{"A":"A","B":"B","C":"C","D":"D","E":"E"}
+            },
+           {"fields":{"A":1,"B":2,"C":3,"D":4,"E":5}
+            },
+           {"fields":{"A":11,"B":12,"C":13,"D":14,"E":15}
+            },
+           {"fields":{"A":21,"B":22,"C":23,"D":24,"E":25}
+            },
+           {"fields":{"A":31,"B":32,"C":33,"D":34,"E":35}
+            }
+         ]
+   `;
 	  let table1 = new Table("container1" );
 	  table1.init(json_data);
 	  let table2 = new Table("container2");
 	  table2.init(json_data2);
+	  let table3 = new Table("container3");
+	  table3.init(json_data3);
 
 	  //let table3 = new Table("container3");
 	  //table3.init();
@@ -82,6 +99,9 @@
 <br/>
 <div class="gp-header">2nd Table Resize in Javascript</div>
 <div class="container" id="container2"></div>
+<br/>
+<div class="gp-header">2nd Table Resize in Javascript</div>
+<div class="container" id="container3"></div>
 	
 	
 
