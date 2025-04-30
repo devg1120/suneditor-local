@@ -20,6 +20,7 @@ export class Table {
 
   constructor(container_id) {
     this.container_id = container_id;
+    
     this.menu_list = [
       ["next insert row", this.next_insert_row],
       ["prev insert row", this.prev_insert_row],
@@ -31,7 +32,7 @@ export class Table {
     //this.test_set_data2();
     //this.test_json_to_data();
     //this.test_json_to_data2();
-
+    this.td_select_drag_start = false;
   }
 
 
@@ -665,10 +666,6 @@ row_dragging_over = (e) => {
       //td.addEventListener("click", (e) => {
       td.removeEventListener("mousedown", null);
       td.addEventListener("mousedown", (e) => {
-              //e.preventDefault(); 
-	      //e.stopPropagation();
-		//e.stopImmediatePropagation();
-              console.log("td click");
         if(e.shiftKey){
               console.log("td click","shift-key");
               if (this.select_td[1] != null) {
@@ -677,11 +674,8 @@ row_dragging_over = (e) => {
               this.select_td[1] = td;
               this.multi_select_set();
               return;
-              //e.preventDefault(); 
-	      //e.stopPropagation();
-		//e.stopImmediatePropagation();
         }
-        //console.log("td click");
+        this.td_select_drag_start = true;
         if (this.select_td[1] != null) {
 		this.multi_select_unset();
         }
@@ -690,6 +684,13 @@ row_dragging_over = (e) => {
         }
         this.select_td[0] = td;
         this.select_td[0].classList.add("selected");
+      });
+      td.addEventListener("mouseenter", (e) => {
+           if (this.td_select_drag_start) {
+                  console.log("mouseenter", td.id);
+                  this.select_td[1] = td;
+                  this.multi_select_set();
+	   }
       });
     });
   }
@@ -883,6 +884,9 @@ row_dragging_over = (e) => {
     //console.log(this.container_id, "mouseUp");
     if (this.dragStart) {
       this.dragStart = false;
+    }
+    if ( this.td_select_drag_start) {
+       this.td_select_drag_start = false;
     }
   };
 
