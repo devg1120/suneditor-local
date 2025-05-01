@@ -912,47 +912,46 @@ row_dragging_over = (e) => {
     //this.resize = this;
     this.resize = e.target;
     this.resizeCheck = this.resize.classList.contains("x_resize");
-    var row_index = parseInt(this.resize.getAttribute("data-resizerow")) - 1;
-	  console.log("row_index", row_index);
+    var row_index = parseInt(this.resize.getAttribute("data-resizecol")) - 1;
     this.row_element = this.table_tr[row_index];
     this.next_row_element = this.table_tr[row_index + 1];
     this.x_dragStart = true;
-    //this.x_cursorStart = this.resizeCheck ? event.pageX : event.pageY;
-    this.x_cursorStart = this.resizeCheck ? event.pageY : event.pageX;
+    this.x_cursorStart = this.resizeCheck ? event.pageX : event.pageY;
     var elm_bound = this.row_element.getBoundingClientRect();
-    this.height = elm_bound.height;
+    this.width = elm_bound.width;
     this.table_wt = this.table.offsetWidth;
-    this.table_ht = this.table.offsetHight;
-    if (this.next_row_element != undefined) {
+    if (this.next_element != undefined) {
       var next_bound = this.next_row_element.getBoundingClientRect();
       this.next_width = next_bound.width;
     }
-    this.resize_top =
-      this.resize.getBoundingClientRect().top - this.tableRect.top;
+    //this.resize_left = this.getBoundingClientRect().left - bodyRect.left;
+    this.resize_left =
+      //this.resize.getBoundingClientRect().left - this.bodyRect.left - this.tableRect.left;
+      this.resize.getBoundingClientRect().left - this.tableRect.left;
   };
 
   mouseMove_x = () => {
     if (this.x_dragStart) {
-      //var cursorPosition = this.resizeCheck ? event.pageX : event.pageY;
-      var cursorPosition = this.resizeCheck ? event.pageY : event.pageX;
-      var mouseMoved = cursorPosition - this.x_cursorStart;
-
-      var newTop = this.resize_top + mouseMoved;
-      var newHeight = this.height + mouseMoved;
-       console.log("newTop",newTop);
-       console.log("newHeight",newHeight);
-
+      var cursorPosition = this.resizeCheck ? event.pageX : event.pageY;
+      var mouseMoved = cursorPosition - this.y_cursorStart;
+      var newLeft = this.resize_left + mouseMoved;
+      var newWidth = this.width + mouseMoved;
       var new_nextWidth, new_nextHeight;
       if (this.next_element != undefined) {
         new_nextWidth = this.next_width - mouseMoved;
       }
-        this.row_element.style.cssText = "height: " + newHeight + "px;";
-        if (this.next_row_element != undefined) {
-          this.next_row_element.style.cssText = "height: " + new_nextHeight + "px";
+      if (
+        newWidth > 30 &&
+        (new_nextWidth > 30 || this.next_element == undefined)
+      ) {
+        this.col_element.style.cssText = "width: " + newWidth + "px;";
+        if (this.next_element != undefined) {
+          this.next_element.style.cssText = "width: " + new_nextWidth + "px";
         } else {
-          this.table.style.hight = this.table_wt + mouseMoved + "px";
+          this.table.style.width = this.table_wt + mouseMoved + "px";
         }
-        this.resize.style.cssText = "top: " + newTop + "px;";
+        this.resize.style.cssText = "left: " + newLeft + "px;";
+      }
     }
   };
 

@@ -387,7 +387,6 @@ row_dragging_over = (e) => {
 
     this.contextMenu = this.container.querySelector("#context-menu");
     this.table_th = this.table.getElementsByTagName("th");
-    this.table_tr = this.table.getElementsByTagName("tr");
 
     this.bodyRect = document.body.getBoundingClientRect();
     this.tableRect = this.table.getBoundingClientRect();
@@ -848,7 +847,6 @@ row_dragging_over = (e) => {
     });
   }
 
-  //=======================================================================
   mouseDown_y = (e) => {
     //this.resize = this;
     this.resize = e.target;
@@ -905,70 +903,6 @@ row_dragging_over = (e) => {
        this.td_select_drag_start = false;
     }
   };
-
-  //=======================================================================
-
-  mouseDown_x = (e) => {
-    //this.resize = this;
-    this.resize = e.target;
-    this.resizeCheck = this.resize.classList.contains("x_resize");
-    var row_index = parseInt(this.resize.getAttribute("data-resizerow")) - 1;
-	  console.log("row_index", row_index);
-    this.row_element = this.table_tr[row_index];
-    this.next_row_element = this.table_tr[row_index + 1];
-    this.x_dragStart = true;
-    //this.x_cursorStart = this.resizeCheck ? event.pageX : event.pageY;
-    this.x_cursorStart = this.resizeCheck ? event.pageY : event.pageX;
-    var elm_bound = this.row_element.getBoundingClientRect();
-    this.height = elm_bound.height;
-    this.table_wt = this.table.offsetWidth;
-    this.table_ht = this.table.offsetHight;
-    if (this.next_row_element != undefined) {
-      var next_bound = this.next_row_element.getBoundingClientRect();
-      this.next_width = next_bound.width;
-    }
-    this.resize_top =
-      this.resize.getBoundingClientRect().top - this.tableRect.top;
-  };
-
-  mouseMove_x = () => {
-    if (this.x_dragStart) {
-      //var cursorPosition = this.resizeCheck ? event.pageX : event.pageY;
-      var cursorPosition = this.resizeCheck ? event.pageY : event.pageX;
-      var mouseMoved = cursorPosition - this.x_cursorStart;
-
-      var newTop = this.resize_top + mouseMoved;
-      var newHeight = this.height + mouseMoved;
-       console.log("newTop",newTop);
-       console.log("newHeight",newHeight);
-
-      var new_nextWidth, new_nextHeight;
-      if (this.next_element != undefined) {
-        new_nextWidth = this.next_width - mouseMoved;
-      }
-        this.row_element.style.cssText = "height: " + newHeight + "px;";
-        if (this.next_row_element != undefined) {
-          this.next_row_element.style.cssText = "height: " + new_nextHeight + "px";
-        } else {
-          this.table.style.hight = this.table_wt + mouseMoved + "px";
-        }
-        this.resize.style.cssText = "top: " + newTop + "px;";
-    }
-  };
-
-  mouseUp_x = () => {
-    //console.log(this.container_id, "mouseUp");
-    if (this.x_dragStart) {
-      this.x_dragStart = false;
-    }
-    if ( this.td_select_drag_start) {
-       this.td_select_drag_start = false;
-    }
-  };
-
-
-  //=======================================================================
-
 /*
   initEvents(table_th) {
     var tb_resize = this.container.getElementsByClassName("tb_resize");
@@ -998,16 +932,6 @@ row_dragging_over = (e) => {
       //document.body.addEventListener("mouseup", this.mouseUp_y);
       this.table_th[i].style.width = this.th_width + "px";
     }
-
-
-     document.body.addEventListener("mousemove", this.mouseMove_x);
-     document.body.addEventListener("mouseup", this.mouseUp_x);
-     var x_resize = this.container.getElementsByClassName("x_resize");
-     console.log("x_resize",x_resize.length);
-     console.log("x_resize",typeof(x_resize));
-     for ( let i = 0; i < x_resize.length; i++) {
-       x_resize[i].addEventListener("mousedown", this.mouseDown_x);
-     }
   }
 
   setTdWidth = () => {
