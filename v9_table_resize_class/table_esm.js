@@ -336,6 +336,7 @@ row_dragging_over = (e) => {
     var menu = document.createElement("div");
     menu.id = "context-menu";
     var table = document.createElement("table");
+    //table.addeventlistener("dragstart", (e) => { e.preventDefault();});
     table.id = "table_resize";
     table.contentEditable = true;
     for (var i = 0; i < table_data.length; i++) {
@@ -678,6 +679,8 @@ row_dragging_over = (e) => {
       td.removeEventListener("mousedown", null);
       td.addEventListener("mousedown", (e) => {
         console.log("td mousedown", e.button);
+	      //e.preventDefault();
+	      //e.stopPropagation();
         if (e.button !== 0) { return }
         if(e.shiftKey){
               console.log("td click","shift-key");
@@ -698,13 +701,22 @@ row_dragging_over = (e) => {
         this.select_td[0] = td;
         this.select_td[0].classList.add("selected");
       });
+	    
       td.addEventListener("mouseenter", (e) => {
+	      //e.preventDefault();
+	      //e.stopPropagation();
            if (this.td_select_drag_start) {
                   //console.log("mouseenter", td.id);
                   this.select_td[1] = td;
                   this.multi_select_set();
 	   }
       });
+      /*
+      td.addEventListener("mousemove", (e) => {
+	      e.preventDefault();
+	      e.stopPropagation();
+      });
+      */
     });
   }
 
@@ -1081,7 +1093,7 @@ row_dragging_over = (e) => {
 } // class end
 
 
-let s = SUNEDITOR.create('sample', {
+let s = SUNEDITOR.create('editarea1', {
     //plugins: plugins,
     mode: 'inline',
     buttonList: [
